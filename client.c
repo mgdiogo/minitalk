@@ -6,7 +6,7 @@
 /*   By: sark <sark@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 21:38:34 by sark              #+#    #+#             */
-/*   Updated: 2023/04/20 02:22:12 by sark             ###   ########.fr       */
+/*   Updated: 2023/04/20 23:04:06 by sark             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	convert_char(int pid, char c)
 	chr = c;
 	while (i >= 0)
 	{
-		if ((chr & 1) == 0)
+		if (chr == 0 || (chr & 1) == 0)
 			bit_array[i] = 0;
 		else if ((chr & 1) == 1)
 			bit_array[i] = 1;
@@ -46,13 +46,14 @@ void	convert_char(int pid, char c)
 			chr >>= 1;
 		i--;
 	}
-	while (i < 8)
+	i = 8;
+	while (--i >= 0)
 	{
 		if (bit_array[i] == 0)
-			kill(pid, SIGURG);
-		else if (bit_array[i] == 1)
+			kill(pid, SIGUSR1);
+		else
 			kill(pid, SIGUSR2);
-		i++;
+		usleep(100);
 	}
 }
 
@@ -61,14 +62,13 @@ int	main(int argc, char **argv)
 	int	id;
 
 	if (argc != 3)
-	{
 		write (1, "Invalid arguments\n", 19);
-	}
 	else
 	{
 		id = ft_atoi(argv[1]);
-		printf("Message sent to %d\n", id);
-		convert_char(id, *argv[2]);
+		while (argv[2] && *argv[2])
+			convert_char(id, *argv[2]++);
+		write (1, "\n", 1);
 	}
 	return (0);
 }
