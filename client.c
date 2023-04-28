@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sark <sark@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 21:38:34 by sark              #+#    #+#             */
-/*   Updated: 2023/04/20 23:04:06 by sark             ###   ########.fr       */
+/*   Updated: 2023/04/28 14:30:36 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	main(int argc, char **argv)
 		id = ft_atoi(argv[1]);
 		while (argv[2] && *argv[2])
 			convert_char(id, *argv[2]++);
-		write (1, "\n", 1);
+		convert_char(id, 10);
 	}
 	return (0);
 }
