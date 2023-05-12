@@ -6,7 +6,7 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 21:38:05 by sark              #+#    #+#             */
-/*   Updated: 2023/04/28 14:28:20 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/05/12 17:59:56 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_putnbr(int nbr)
 	write(1, &temp, 1);
 }
 
-int	power_res(int pos)
+int	bit_to_char(int pos)
 {
 	int	res;
 
@@ -51,13 +51,13 @@ void	handle_signal(int pid)
 	else
 		bit = 1;
 	if (bit == 1)
-		res += power_res(i);
+		res += bit_to_char(i);
 	i++;
 	if (i == 8)
 	{
 		write (1, &res, 1);
 		i = 0;
-		res = 0; 
+		res = 0;
 	}
 }
 
@@ -69,10 +69,10 @@ int	main(void)
 	sa.sa_handler = &handle_signal;
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
-	write (1, "Server PID: ", 13);
+	write (1, "Server is up and running on PID: ", 34);
 	ft_putnbr(getpid());
 	write (1, "\n", 1);
 	while (1)
-		usleep(100);
+		pause();
 	return (0);
 }
