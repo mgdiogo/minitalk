@@ -6,7 +6,7 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 21:38:34 by sark              #+#    #+#             */
-/*   Updated: 2023/05/12 19:22:11 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/05/12 19:41:50 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ void	char_to_bit(int pid, char c)
 {
 	int	i;
 	int	chr;
-	int	bit_array[8];
+	int	bit_array[7];
 
-	i = 7;
+	i = 6;
 	chr = c;
 	while (i >= 0)
 	{
@@ -46,8 +46,8 @@ void	char_to_bit(int pid, char c)
 			chr >>= 1;
 		i--;
 	}
-	i = 8;
-	while (--i >= 0)
+	i = 7;
+	while (i-- >= 0)
 	{
 		if (bit_array[i] == 0)
 			kill(pid, SIGUSR1);
